@@ -36,3 +36,6 @@
     transform: rotate(360deg);
   }
 }
+svg {
+  transition: all .3s ease-in-out;
+}
