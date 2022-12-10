@@ -10,9 +10,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {toggle ? <BulbOnIcon /> : <BulbOffIcon />}
-
-        <button onClick={()=>setToggle((toggle)=>!toggle)}>Click</button>
+        <div onClick={()=>setToggle((toggle)=>!toggle)}>
+         {toggle ? <BulbOnIcon /> : <BulbOffIcon />}
+        </div>
       </header>
     </div>
   );
