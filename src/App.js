@@ -10,7 +10,7 @@ function App() {
   const [toggle, setToggle] = useState(false);
   return (
     <div className="App">
-      <header className="App-header">
+      <Header className="App-header" toggle={toggle}>
         <div onClick={()=>setToggle((toggle)=>!toggle)}>
           <IconWrapper toggle={toggle}>
             <BulbOnIcon />
@@ -19,7 +19,7 @@ function App() {
             <BulbOffIcon />
           </IconWrapper>
         </div>
-      </header>
+      </Header>
     </div>
   );
 }
@@ -30,6 +30,11 @@ const IconWrapper = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
+  transition: all .3s ease-in-out;
+`
+
+const Header = styled.div`
+  background-color:${props => props.toggle ? "white" : "#282c34"};
   transition: all .3s ease-in-out;
 `
 
