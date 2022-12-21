@@ -6,6 +6,7 @@ import BulbOnIcon from "./assets/BulbOnIcon";
 import styled from "styled-components";
 import { toast } from "react-toastify";
 import ToastWrapper from "./ToastWrapper";
+
 function App() {
   const [toggle, setToggle] = useState(false);
   const notify = () =>
