@@ -1,11 +1,13 @@
 import "./App.css";
 
+import React from "react";
 import BulbOffIcon from "./assets/BulbOffIcon";
 import { useState } from "react";
 import BulbOnIcon from "./assets/BulbOnIcon";
 import styled from "styled-components";
 import { toast } from "react-toastify";
 import ToastWrapper from "./ToastWrapper";
+import socketIOClient from "socket.io-client";
 
 function App() {
   const [toggle, setToggle] = useState(false);
@@ -20,10 +22,35 @@ function App() {
       theme: "dark",
     });
 
+  const [socket, setSocket] = React.useState({});
+
+  const handleClick = () => {
+    socket.emit("bulb-clicked", { on: !toggle });
+    setToggle((t) => !t )
+  }
+  React.useEffect(() => {
+    const socket = socketIOClient("/");
+
+    setSocket(socket);
+
+    socket.on("bulb", ({ on }) => {
+      setToggle(on);
+      if (!toggle && on) {
+        notify();
+      }
+    });
+
+    return function cleanup() {
+      socket.disconnect();
+    };
+  }, []);
+
   return (
     <div className="App">
       <Header className="App-header" toggle={toggle}>
-        <div onClick={() => { setToggle((toggle) => !toggle); notify(); }}>
+        <div
+          onClick={handleClick}
+        >
           <IconWrapper toggle={toggle}>
             <BulbOnIcon />
           </IconWrapper>
